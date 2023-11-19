@@ -145,15 +145,13 @@ After successfully creating and training the model, it's time to make prediction
 
 <img width="1070" alt="Screenshot 2023-11-19 at 2 42 14 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/5b4053a4-dc35-4897-8b01-e7288b248bd7">
 
+References:
 
+https://www.simplilearn.com/tutorials/statistics-tutorial/central-limit-theorem#:~:text=and%20its%20applications.-,What%20is%20the%20Central%20Limit%20Theorem%3F,equal%20to%20the%20population%20mean.
 
+https://www.udemy.com/course/the-data-science-course-complete-data-science-bootcamp/learn/lecture/10777190#content
 
-
-
-
-
-
-
+Povak, N. A., Hessburg, P. F., McDonnell, T. C., Reynolds, K. M., Sullivan, T. J., Salter, R. B., & Cosby, B. J. (2014). Machine learning and linear regression models to predict catchment-level base cation weathering rates across the southern Appalachian Mountain region, USA. Water Resources Research, 50(4), 2798–2814. https://doi.org/10.1002/2013WR014203
 
 
 
