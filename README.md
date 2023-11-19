@@ -68,6 +68,47 @@ In conclusion, these findings emphasize the complexity of soccer player abilitie
 
 # Tableau Dashboard and Results
 
+<img width="1440" alt="Screenshot 2023-11-16 at 2 01 44 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/b4edc171-bb42-40ae-b386-3f397c18b9b9">
+
+Radial Bar Charts:
+The top-right corner of the display features a radial bar chart showcasing the leading countries with the highest number of valuable attacking football players. Each bar symbolizes a different country, with its length indicating the total value of attacking players from that nation—the longer the bar, the higher the players' value. Accompanying the chart is a ranked list of countries on the left, organized by the players' value, starting with the top country. Beside each country's name, the actual total value of their attacking players is indicated numerically. England, France, and Brazil are notable leaders in this chart, with Belgium, the Netherlands, and Italy also securing spots in the top 10.
+The second radial bar chart differs only in its criteria, focusing on the total minutes played by players from each country. Here, England, Spain, and France emerge as frontrunners, while Argentina, Belgium, and the Netherlands also make it into the top 10. This chart provides a different perspective on the contribution of players from various countries, measured in terms of their on-field time.
+
+The Progress Map:
+The "Progress Map" graph uses color intensity to indicate the progress of attacking players' market values in European countries over the last three years. Darker shades on the map represent countries with significant improvement or higher performance levels of attacking players, while lighter shades indicate less progress. This visualization allows for a quick comparative analysis of which countries have seen more substantial advancements in the values of their attacking football players in last 3 years.
+We can divide Europe to 2 parts, While Western Europe continue to improve in soccer, Eastern Europe shows relatively less improvement. It also means trend will not stop and we will see Western Europe’s dominance in next years as in previous years. The Scandinavian countries have defied expectations with a significant improvement that can be considered most unexpected outcome from this graph.
+
+Donut Charts:
+The donut charts on the dashboard represent the distribution of goals scored and market values for players categorized by their preferred foot: right-footed, left-footed, and both-footed. The "Goal Distribution by Foot" chart illustrates the average goals scored by each category, providing insights into the goal-scoring tendencies according to the players' foot dominance. The "Value Distribution by Foot" chart, on the other hand, details the market value associated with players of each foot preference, highlighting the market value attributed to right-footed, left-footed, and ambidextrous players within the football market. These visualizations help to analyze the performance and market perception of different footed players. 
+Left footed players are fewer than right-footed ones. Some sources, believe left-footed players are more valuable due to that reason. Our analysis almost resonates that with 5 million value difference between these 2 groups. In every economic situation, less can often hold more value. In the context of goals, it is evident that right-footed players tend to score relatively more, which aligns with the results of our hypothesis testing.
+
+The Area Chart:
+The position-based area chart illustrates the progress of players over time. Each player is represented by a distinct colored area on the chart, and the vertical axis shows their recent ages. As you move along the horizontal axis, the area under each player's curve reveals their cumulative progress in recent years. The chart offers a quick, insightful glimpse into how players evolve and compete, making it a valuable resource for decision-making and strategic planning.
+In conclusion, there has been significant progress among center forwards in recent years, while right-wing players appear to have made comparatively less progress. Clubs should take special note of this finding when considering player transfers, as opting for right-wing players rather than left-wing players would likely be a more logical choice, given the expected scarcity of quality right wingers over time, as indicated by our graph.
+
+The Bar Chart:
+The bar chart labeled "Country-wise Goals and Injuries Comparison Chart" provides a visual comparison between the number of goals scored and the injuries sustained by football players from various countries. Each country is represented by a bar with size of goals and the color indicating the injuries. The bars reflect the total goals scored by players from that nation, while the injury colors indicate the frequency of injuries sustained over a specific period. 
+As a result, it is evident that high-performing countries exhibit higher injury rates among their players. This contrast can provide valuable insights for discussions regarding the delicate balance between aggressive play and player safety within international teams, as well as the effectiveness of training and medical support across various footballing nations.
+     Furthermore, it's important to consider that the top three countries, namely England, France, and Spain, produce a substantial number of talented players. However, it's worth noting that two of these countries boast the best leagues globally, while the French league is often regarded as one of the most physically demanding. The Premier League, in particular, features the highest number of games in a calendar year compared to other leagues, which could explain the higher incidence of injuries. This serves as a reminder that more games can lead to the development of exceptional players but also expose them to a higher risk of injuries and physical strain.
+
+# Value Calculator
+
+In the world of football (soccer), determining the value of a player can be a complex and sometimes biased process. Factors such as market trends and personal opinions can skew valuations. However, to bring some objectivity into the equation, I've created a function that calculates a player's value based on concrete metrics, free from any emotional bias.
+Key Metrics Considered:
+	Performance Score: I start by evaluating a player's offensive performance, which is a combination of the number of goals they've scored and the number of assists they've provided to their team.
+Age: Age plays a crucial role in assessing a player's value. Different age groups are given different weightings to reflect their career stage.
+Injury Duration: I take into account the total duration of injuries a player has suffered, which can impact their availability to their team.
+Awards: The number of achievements a player has earned is factored in to recognize their excellence in the sport.
+Output:
+The function returns a calculated player value, providing an objective estimate of their worth.
+
+<img width="825" alt="Screenshot 2023-11-19 at 1 13 26 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/d0c3996a-9683-4110-a4b3-47669ad187b2">
+
+Although our function may not offer a flawless representation of a player's value, it presents a structured and data-driven approach to the evaluation process. This approach can help mitigate the biases often linked to player valuations. To further enhance the function, we could consider assigning more weight to recent goals and introducing an additional factor that accounts for a player's experience by taking into consideration the various leagues they have played in. However, our dataset doesn’t contain that much information, it seems prudent to retain the function in its current form.
+
+
+
+
 
 
 
