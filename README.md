@@ -106,6 +106,54 @@ The function returns a calculated player value, providing an objective estimate 
 
 Although our function may not offer a flawless representation of a player's value, it presents a structured and data-driven approach to the evaluation process. This approach can help mitigate the biases often linked to player valuations. To further enhance the function, we could consider assigning more weight to recent goals and introducing an additional factor that accounts for a player's experience by taking into consideration the various leagues they have played in. However, our dataset doesn’t contain that much information, it seems prudent to retain the function in its current form.
 
+# Logistic Regression
+
+First, I conducted an analysis to determine whether a player received an individual award. The primary objective of the logistic model was to predict whether a player would win an individual award during their career. 
+Upon examining a heatmap, I decided to include the following columns in the model: 'Dummy Position,' 'Goals Per Season,' 'Assists Per Season,' 'Recent Progress,' and 'Injury Sum.' The 'Dummy Position' column was created based on the 'Position' column, assigning numerical values to indicate player positions. Additionally, I preprocessed the data to create new columns representing the average number of goals and assists per season for each player. ('Goals Per Season,' 'Assists Per Season,)
+To ensure the model's accuracy, I performed VIF (Variance Inflation Factor) calculations and found that 'Assists Per Season' exhibited high multicollinearity with 'Goals Per Season.' Consequently, I chose to drop the 'Assists Per Season' column from the model.
+Final Features passed Multicollinearity assumption:
+
+<img width="191" alt="Screenshot 2023-11-19 at 1 17 45 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/96d00bdb-e9e0-49c4-840c-49aa4460acb9">
+
+After creating and fine-tuning the model through multiple iterations, I concluded that the 'Injury' and 'Position' columns did not significantly contribute to the model's predictive power. It is worth noting that while players may experience injuries, these injuries typically do not have a substantial impact on their ability to earn individual awards over a career spanning 25-30 years. Additionally, the 'Recent Progress' column was found to be of limited value, as it only reflects a player's recent performance and only accounts for awards received prior to that limited period. Consequently, I decided to exclude these columns from the final model.
+The Receiver Operating Characteristic (ROC) curve depicted below serves as a visual representation of the model's diagnostic capabilities. This curve illustrates the relationship between the true positive rate (sensitivity) and the false positive rate (1-specificity) across various threshold settings. In essence, when the blue line closely hugs the y-axis, it signifies superior performance. Our curve covers 81%, indicating a fairly strong performance.
+
+<img width="729" alt="Screenshot 2023-11-19 at 1 19 55 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/e1b1870c-9eb9-40f1-8652-b68b4814bfde">
+
+The model demonstrates an accuracy of 77.78%, signifying its capacity to correctly identify award winners approximately 77.78% of the time. This accuracy score underscores the model's overall predictive prowess. 
+The precision score of 58.66% reveals that among all the players predicted to receive awards, approximately 58.66% of them actually do. This precision metric highlights the model's ability to make accurate positive predictions.
+The recall score of 48.21% signifies the model's capability to identify genuine award winners. Although it captures less than half of the true award winners, it strikes a balance with other performance metrics.
+The F1 score, standing at 52.94%, holds particular significance in scenarios where equal importance is assigned to precision and recall. The F1 score suggests a moderate equilibrium between precision and recall in our model's performance.
+With an AUC (Area Under the Curve, can be viewed better in graph) of 0.8125, the model achieves a substantial level of discrimination between individuals who received awards and those who did not. An AUC of 0.8125 reflects strong model performance, indicating a high degree of separation between the positive and negative classes.
+In summary, the model's predictive variables were narrowed down to 'Position' and 'Goals Per Season.' As a result of this refinement, the model achieved an impressive accuracy level of 80% as indicated by the confusion matrix, which is a highly satisfactory outcome.
+
+# Random Forest Model
+ 
+After I implemented lots of preprocessing and analysis, a Random Forest model was developed with selected features: 'Goal Per Season', 'Individual Award', 'Current Value (M)', 'Minutes Played', 'Age', 'Goals in 2021', and 'League Code'. The initial model yielded an R-squared value of 0.43, a promising start. I then conducted a feature importance analysis, which revealed that the 'Individual Award' variable contributed the least to the model’s predictive power, leading to its removal.
+
+<img width="655" alt="Screenshot 2023-11-19 at 1 44 09 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/9bbfd9ed-c4ff-4dae-8627-0b03c75d5208">
+
+Subsequently, I employed grid search to optimize hyperparameters, specifically focusing on the number of trees ('n_estimators') and the depth of each tree ('max_depth'). The model showed improved performance with the parameters set at 'n_estimators': 220 and 'max_depth': 5, resulting in an enhanced R-squared value of approximately 48%.
+
+<img width="1043" alt="Screenshot 2023-11-19 at 1 50 55 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/09a0a5a8-20cf-43e7-8233-28ffdd9e48a7">
+
+To ensure the model's robustness and guard against overfitting, I applied cross-validation techniques. The results were encouraging, showing that the model did not suffer from overfitting. The fact that the validation R-squared values closely resemble the trained R-squared (0.48) is an encouraging sign. It implies that our model's performance on the validation data is consistent with its performance on the training data. When validation R-squared values align closely with the trained R-squared, it suggests that the model is likely to generalize well to new, unseen data. In other words, the model's predictive ability appears to be stable and reliable beyond the training dataset.
+Moreover, the standard deviation of the cross-validation results was relatively low at 0.07, indicating consistent performance across different subsets of the data. This further validated the model's reliability and predictive accuracy.
+
+<img width="651" alt="Screenshot 2023-11-19 at 1 52 23 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/e568575f-7c87-4a07-978d-37a9cd9f47cb">
+
+After successfully creating and training the model, it's time to make predictions about the top-scoring players for the upcoming 2023 season. As time progresses, we will see how accurate the model's predictions turn out to be. Below, you can find the forecasted highest-scoring players, along with their corresponding information and projected goal tallies:
+
+<img width="1070" alt="Screenshot 2023-11-19 at 2 42 14 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/5b4053a4-dc35-4897-8b01-e7288b248bd7">
+
+
+
+
+
+
+
+
+
 
 
 
