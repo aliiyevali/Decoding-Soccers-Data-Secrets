@@ -1,5 +1,5 @@
-# Soccer-Player-Analysis
-
+Results and Interpretations from Comprehensive Attacking Soccer Players Analysis
+ 
 # Introduction
 
 This document presents a comprehensive analysis of data primarily sourced from Transfermarkt.com, focusing on attacking players in professional soccer. The dataset was meticulously scraped from the website, ensuring a rich collection of relevant data.
