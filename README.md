@@ -39,4 +39,38 @@ In light of the specific scenario where a Manchester club seeks a replacement st
 Our methodology for estimating the market value of these sought-after young and high-performing attacking players in 2023 involves the utilization of the sampling concept. I utilize the Central Limit Theorem (CLT) in our analysis because performing t-statistic tests on non-normally distributed data can be problematic. By applying CLT, I transform the player values within this specific subset into smaller, manageable samples. Within each of these samples, we calculate the average market value. This approach allows analysis to provide valuable insights into the typical market value exhibited by players meeting these stringent criteria while addressing the challenges posed by non-normal data distributions.
 Final dataset after CLT implementation:
 
+<img width="648" alt="Screenshot 2023-11-18 at 3 35 25 PM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/03573c14-1c3f-4564-a02b-66e8ef01a26f">
+
+To provide the Manchester club with a highly confident (95%) estimate of how much acquiring such a player might cost in 2023, we employ statistical techniques to determine confidence intervals around the sample means. These intervals offer an estimate of the likely range in which the true average market value of these players resides, given our sample data. The use of a specific multiplier in the calculation assures a 95% level of confidence, demonstrating our commitment to precision. Based on our rigorous analysis, we estimate that the market value for these promising young attacking players in 2023 falls within the range of $26 million to $42 million, thus empowering the Manchester club to make a well-informed and confident decision in their pursuit of a replacement striker.
+
+# Hypothesis Testing
+
+Some experts suggest that left-footed players have more abilities in playmaking, such as providing assists, while right-footed players are often associated with having better finishing skills when it comes to scoring goals. This raises the question of whether these notions are grounded or if they are merely myths in the world of soccer. To shed light on this topic and investigate whether there is a substantial difference in playmaking abilities between left-footed and right-footed players, I will conduct an analysis using statistical methods to determine the validity of these claims.
+Non-Normal distributions of Goals by Right, Left footed players:
+
+<img width="1440" alt="Screenshot 2023-11-18 at 9 21 41 PM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/b76dcb65-8e90-442b-9176-0ef4c6bdce56">
+
+I conducted a hypothesis test to examine whether there is a significant difference in playmaking skills, as indicated by the number of assists, between left-footed and right-footed attacking players. To perform this analysis, I used the Mann-Whitney U test, which is appropriate for comparing non-normally distributed data.
+The null hypothesis in this test is that there is no significant difference in assist production between left-footed and right-footed attackers. To determine whether I can reject the null hypothesis, I compare the calculated p-value to a predetermined significance level (alpha), which in this case is set at 0.10.
+- The U-statistic provides a measure of the rank-based difference between the two groups. In this case, the U-statistic is 45358.5.
+- The p-value, which is 0.4039, represents the probability of obtaining results as extreme as the ones observed in our data, assuming that the null hypothesis is true.
+Given that the p-value (0.4039) is greater than the significance level (alpha = 0.10), I do not have sufficient evidence to reject the null hypothesis. Therefore, I conclude that there is no significant difference in final passing ability, as measured by assists, between left-footed and right-footed attacking players based on the data analyzed.
+As a result, there is no strong statistical evidence to support the idea that left-footed attackers provide significantly more assists than right-footed players in the dataset.
+In the second phase of analysis, I conducted a hypothesis test to explore whether there is a significant difference in goal-scoring abilities between right-footed and left-footed players. To perform this analysis, I utilized the Mann-Whitney U test again, which is particularly suitable for comparing non-normally distributed data.
+In this context, the null hypothesis posits that there is no significant difference in goal-scoring abilities between right-footed and left-footed players. To ascertain whether I can reject the null hypothesis, I compared the calculated p-value to a predetermined significance level (alpha), which in this analysis was set at 0.10.
+- The U-statistic represents a measure of the rank-based difference between the two groups. In this case, the U-statistic is 52398.0.
+- The p-value, which is approximately 0.0297, signifies the probability of observing results as extreme as those in our data, assuming that the null hypothesis holds true.
+Given that the p-value (0.0297) is less than the significance level (alpha = 0.10), I have sufficient statistical evidence to reject the null hypothesis. This implies that there is indeed a significant difference in goal-scoring abilities between right-footed and left-footed players, based on the most-recent data including more than 700 records.
+In simpler terms, the results suggest that right-footed players tend to have superior goal-scoring abilities compared to their left-footed counterparts in the dataset. This finding provides support for the assumption that right-footed players excel in terms of goal scoring.
+Our analysis offers insights into football player performance in the year 2023, but it's important to consider that expert opinions may have been formed based on data and observations from previous years. The world of football is dynamic, with tactics, strategies, and player roles evolving rapidly over time. What held true in the past may not necessarily hold in the present. Expert viewpoints often reflect insights gathered during different football eras.
+In essence, football performance is a complex interplay of factors, including individual skills, team strategies, opponent tactics, and coaching philosophies. Our findings shed light on player performance specific to 2023, but they should be viewed within the broader context of an ever-changing sport, where tactics and strategies continue to evolve in response to contemporary demands and trends.
+In conclusion, these findings emphasize the complexity of soccer player abilities, which are influenced by various factors beyond just their dominant foot. In my opinion, every individual attacking player has unique skills and generalizing players by only their foot preference is not logical at this point. 
+
+# Tableau Dashboard and Results
+
+
+
+
+
+
 
