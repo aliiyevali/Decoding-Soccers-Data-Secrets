@@ -48,7 +48,7 @@ To provide the Manchester club with a highly confident (95%) estimate of how muc
 Some experts suggest that left-footed players have more abilities in playmaking, such as providing assists, while right-footed players are often associated with having better finishing skills when it comes to scoring goals. This raises the question of whether these notions are grounded or if they are merely myths in the world of soccer. To shed light on this topic and investigate whether there is a substantial difference in playmaking abilities between left-footed and right-footed players, I will conduct an analysis using statistical methods to determine the validity of these claims.
 Non-Normal distributions of Goals by Right, Left footed players:
 
-<img width="1440" alt="Screenshot 2023-11-18 at 9 21 41 PM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/b76dcb65-8e90-442b-9176-0ef4c6bdce56">
+<img width="959" alt="Screenshot 2023-11-18 at 3 57 35 PM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/c2729efb-2d0d-4994-a058-05967ec81f39">
 
 I conducted a hypothesis test to examine whether there is a significant difference in playmaking skills, as indicated by the number of assists, between left-footed and right-footed attacking players. To perform this analysis, I used the Mann-Whitney U test, which is appropriate for comparing non-normally distributed data.
 The null hypothesis in this test is that there is no significant difference in assist production between left-footed and right-footed attackers. To determine whether I can reject the null hypothesis, I compare the calculated p-value to a predetermined significance level (alpha), which in this case is set at 0.10.
