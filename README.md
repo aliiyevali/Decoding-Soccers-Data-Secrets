@@ -28,4 +28,15 @@ Goals by Year (2020, 2021, 2022): Goals scored in specific years.
 League_Code: League representation code.
 Cups: Number of cups won.
 Position: Numerical code for playing position.
-![image](https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/2d90f97a-7daa-48e1-aaca-a394ceecb245)
+
+# Confidence Intervals
+
+Case Introduction: 
+Imagine a scenario where one of the prominent Manchester football clubs faces a sudden setback as their star striker sustains a season-ending injury. With their key player sidelined, the club urgently seeks to bolster their squad by acquiring a top-tier attacking player to maintain their competitive edge in the upcoming season. To ensure they make an informed and confident decision, they turn to us (data analyst) with a crucial question: How much can they expect to pay for a young & quality attacking player while asked to being highly confident (95%) in the estimated price?
+     Analysis:
+My analysis commences by delving into the dataset, focusing on soccer players' values, with a particular emphasis on a variable known as "Currentvalue(M)," representing the market value of players in millions. This variable plays a pivotal role in deciphering various facets of player dynamics, including performance, popularity, and market demand.
+In light of the specific scenario where a Manchester club seeks a replacement striker, we will continue with a selected subgroup of players. This subgroup consists of young attacking players aged between 22 to 28 years and those deemed "good" based on their ContributionPermin, which falls below 140. This meticulous filtering mirrors the practical need to identify high-potential attacking talents. 
+Our methodology for estimating the market value of these sought-after young and high-performing attacking players in 2023 involves the utilization of the sampling concept. I utilize the Central Limit Theorem (CLT) in our analysis because performing t-statistic tests on non-normally distributed data can be problematic. By applying CLT, I transform the player values within this specific subset into smaller, manageable samples. Within each of these samples, we calculate the average market value. This approach allows analysis to provide valuable insights into the typical market value exhibited by players meeting these stringent criteria while addressing the challenges posed by non-normal data distributions.
+Final dataset after CLT implementation:
+
+
