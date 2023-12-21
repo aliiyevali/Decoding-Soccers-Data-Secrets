@@ -67,7 +67,7 @@ In conclusion, these findings emphasize the complexity of soccer player abilitie
 
 # Tableau Dashboard and Results
 
-<img width="1440" alt="Screenshot 2023-11-16 at 2 01 44 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/b4edc171-bb42-40ae-b386-3f397c18b9b9">
+![Soccer TSA Dashboard](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/93e8832c-862d-4cd2-9efb-f23f93931d9f) 
 
 Radial Bar Chart:
 The top-left corner of the display features a radial bar chart showcasing the leading players with the highest number of stats between attacking football players. Each bar symbolizes a different top player, with its length indicating the total number of goals scored by particular attacking player —the longer the bar, the higher number of goals scored. Beside each player's name, the actual total number of goals is indicated numerically. Haaland, Mbappe, and Pedro are notable leaders in this chart, with Kane, Benzema, and Lewandowski also securing spots in the top 10.
@@ -126,26 +126,85 @@ The F1 score, standing at 52.94%, holds particular significance in scenarios whe
 With an AUC (Area Under the Curve, can be viewed better in graph) of 0.8125, the model achieves a substantial level of discrimination between individuals who received awards and those who did not. An AUC of 0.8125 reflects strong model performance, indicating a high degree of separation between the positive and negative classes.
 In summary, the model's predictive variables were narrowed down to 'Position' and 'Goals Per Season.' As a result of this refinement, the model achieved an impressive accuracy level of 80% as indicated by the confusion matrix, which is a highly satisfactory outcome.
 
-# Random Forest Model
- 
-After I implemented lots of preprocessing and analysis, a Random Forest model was developed with selected features: 'Goal Per Season', 'Individual Award', 'Current Value (M)', 'Minutes Played', 'Age', 'Goals in 2021', and 'League Code'. The initial model yielded an R-squared value of 0.43, a promising start. I then conducted a feature importance analysis, which revealed that the 'Individual Award' variable contributed the least to the model’s predictive power, leading to its removal.
+# Machine Learning: SARIMAX
 
-<img width="655" alt="Screenshot 2023-11-19 at 1 44 09 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/9bbfd9ed-c4ff-4dae-8627-0b03c75d5208">
+The initial modeling attempt utilized a SARIMAX model to forecast goal statistics. Time series analysis necessitates a different data format compared to conventional machine learning models. A second attempt involved reshaping the data to fit the SARIMAX model better, which yielded improved results. The reconfigured SARIMAX model, with transposed data, emerged as highly-accurate, achieving a Mean Absolute Error (MAE) of 3.3 and a Root Mean Squared Error (RMSE) of 4.6. The third trial included an ensemble and stacking of three models: an LSTM model to predict 2022 goals based on historical performance data, an XGBoost model leveraging players' exogenous data for the same year, and a linear regression model that synthesized outputs from the other models to forecast actual goals. 
+Prior to modeling, the stationarity of the time series data was ascertained using the Augmented Dickey-Fuller (ADF) test, confirming the data's suitability for time series analysis. The accompanying graph illustrates the SARIMAX model's initial results, with an MAE of 6.4, which is anticipated to be halved through subsequent model optimization strategies.
 
-Subsequently, I employed grid search to optimize hyperparameters, specifically focusing on the number of trees ('n_estimators') and the depth of each tree ('max_depth'). The model showed improved performance with the parameters set at 'n_estimators': 220 and 'max_depth': 5, resulting in an enhanced R-squared value of approximately 48%.
+![basladiq](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/7c7ba678-019d-4124-8736-18f52e04a030)
 
-<img width="1043" alt="Screenshot 2023-11-19 at 1 50 55 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/09a0a5a8-20cf-43e7-8233-28ffdd9e48a7">
+Following a thorough multicollinearity examination, I implemented both logarithmic and Box-Cox transformations on the target variable to mitigate any issues of heteroscedasticity. The results of these transformations exhibited a slight improvement over the use of the original target variable. Additionally, scaling was applied, which yielded marginal enhancements.
+Further attempts at feature selection and hyperparameter tuning were made, experimenting with various combinations and settings. However, these efforts did not result in substantial gains.
+The results of final model of my first try with 95% confidence intervals, From the graph, it's clear that while the model does follow the trend of the actual values to some degree, there is considerable volatility, and many of the predictions are not very close to the actual values (indicated by the vertical distance between the blue and orange lines). The confidence intervals are also quite wide for many of the predictions, which suggests that the model is not very certain about its forecast:
 
-To ensure the model's robustness and guard against overfitting, I applied cross-validation techniques. The results were encouraging, showing that the model did not suffer from overfitting. The fact that the validation R-squared values closely resemble the trained R-squared (0.48) is an encouraging sign. It implies that our model's performance on the validation data is consistent with its performance on the training data. When validation R-squared values align closely with the trained R-squared, it suggests that the model is likely to generalize well to new, unseen data. In other words, the model's predictive ability appears to be stable and reliable beyond the training dataset.
-Moreover, the standard deviation of the cross-validation results was relatively low at 0.07, indicating consistent performance across different subsets of the data. This further validated the model's reliability and predictive accuracy.
+![basladiq2](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/966205f5-fec6-4918-886d-530c0f05ba8a)
 
-<img width="651" alt="Screenshot 2023-11-19 at 1 52 23 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/e568575f-7c87-4a07-978d-37a9cd9f47cb">
+Optimizing the model to achieve a Mean Absolute Error (MAE) of 5.9 has been a step in the model refinement process, but it falls short of the targeted performance goals. In the quest for further optimization, various strategies have been considered and tested.
+Initially, the inclusion of team data was hypothesized to enhance model performance, under the assumption that team dynamics could be a significant predictor of individual player goal-scoring potential. However, this proved counterproductive, as the variability in goal-scoring across players from different teams year-on-year introduced more noise than predictive value.
+Subsequently, a transformation of the dataset was applied, transposing the data to make it more amenable to the SARIMAX model, which improved the model's performance. The application of smoothing techniques directed the model to weigh recent years more heavily than older ones, leading to a better fit with a training MAE of 3.4 and a Test MAE of 5.2.
+Given the impracticality of evaluating every possible feature combination due to time and resource constraints, my strategy has pivoted to assess features based on their causal relationships and associated coefficients. This phase led me to discard the 'minutes played' variable. My rationale was that the 'age' variable already serves as an indicator of a player's experience, rendering the 'minutes' data somewhat redundant. The subsequent results affirmed my hypothesis; excising the 'minutes' feature improved the model's performance, culminating in a training MAE of 3.38 and a test MAE of 4.69.
+To contextualize, MAE—Mean Absolute Error—is a metric for gauging the proximity of the model's predictions to the actual outcomes. A lower MAE is synonymous with greater predictive accuracy. In the context of the training data, an MAE of 3.38 suggests that the model's predictions deviate from the actual goal count by an average of 3.38 goals. Similarly, an MAE of 4.69 for the test set denotes a slight uptick in the average error to 4.69 goals for data the model hasn't previously encountered, which is an expected phenomenon as models generally exhibit a dip in performance when confronted with new data.
+Refined model results:
 
-After successfully creating and training the model, it's time to make predictions about the top-scoring players for the upcoming 2023 season. As time progresses, we will see how accurate the model's predictions turn out to be. Below, you can find the forecasted highest-scoring players, along with their corresponding information and projected goal tallies:
+![basladiq3](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/ba67c27d-12ed-4101-810b-5477a49b9288)
+![basladiq4](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/454a41bd-78fa-4177-9984-a348434f2139)
 
-<img width="1070" alt="Screenshot 2023-11-19 at 2 42 14 AM" src="https://github.com/aliiyevali/Soccer-Player-Analysis/assets/147966223/5b4053a4-dc35-4897-8b01-e7288b248bd7">
+The plot above suggests that the SARIMAX model is capturing the patterns in the data effectively, and the errors it makes are seemingly random, which is what you aim for in a well-fitting time series model.
 
-References:
+![basladiq5](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/0e2eec5a-fb08-4122-80ca-b925f8fed3c3)
+
+The peak of the density plot is around 0, which is a good sign. It suggests that most predictions are close to the actual values.
+The distribution appears somewhat normal but slightly right skewed, indicating that there are more instances of under-prediction (predicting fewer goals than actually scored) than over-prediction. I took into account the injury summaries of players; that's why the model is so good at handling overprediction. But for the underprediction problem, there is no merit in measuring these players. Reasons can differ in such a complex sport named football. 
+There are a few large errors towards the right, which could represent outliers where the model has significantly under-predicted the number of goals. This is quite reasonable when you consider that some players unexpectedly score more goals in a single year, which is common in football. Experts even have a name for this kind of player: 'one-season wonder.' They peak in their career for a season and then return to their old numbers the next season.
+
+![basladiq6](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/fc68e164-c429-41e5-ae75-e4f5c68b7282)
+
+There is a visible spread between the actual and predicted values, which is expected in any predictive modeling task. The confidence intervals are quite wide, especially for higher values, indicating more significant uncertainty in the predictions for players with a large number of goals. The model seems to capture the general trend, but there are noticeable discrepancies, particularly for players with very high or very low goal counts. 
+
+![basladiq7](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/86c63b9e-ccf5-4b15-9428-7cb4d0ea0546)
+
+At lag 0, autocorrelation is always 1 because it's comparing each data point with itself. At higher lags, the autocorrelation values are hovering around zero. This suggests that there is little to no autocorrelation in the residuals at these lags, which is a good sign. It implies that the residuals (the errors made by the model) are random and don't follow a particular pattern over time.
+Considering the entire range (0 to 60) of the target variable, an MAE of 3 or 4 can be seen as relatively good. The standard deviation of my target column is 7.1. A training MAE of 3 means that the average prediction error on the training set is less than half the standard deviation. This indicates that the model has a good level of accuracy on the training data.
+A test MAE of 4, while higher than the training MAE, is still slightly over half the standard deviation. It signifies that the model is reasonably accurate on unseen data. The model is somewhat hindered by the high variability of the target variable. 
+The next phase involves exploring more sophisticated modeling techniques by ensemble learning and stacking three distinct models, potentially capturing the complex relationships within the data more effectively. This ensemble approach could provide a pathway to achieving the desired prediction accuracy.
+
+# Results from SARIMAX model:
+
+As I mentioned, residuals don't have a pattern. The model captured patterns well, and there are no overfitting or underfitting problems. We can see it from the close numbers between the test and train MAE and RMSEs. The only concern can be some outliers in the data with so many goals. In football, coaches change one's approach by implementing attacking football, which leads to more goals, while others prefer defending and consider scoring only one goal to be enough for them. Coaches also affect players' performances, not only by their tactics but also by the relationships between them. The personal lives of players are another thing that can't be predicted. The luck in soccer is another unpredictable dimension. There is so much unpredictability when it comes to goals, and I consider a MAE of 3 and 4 very well in such circumstances.
+
+# Leveraging the Ensemble and Stacking Techniques
+
+The integration of LSTM and XGBoost models aims to augment the predictive robustness by harnessing their distinct capabilities. The LSTM model is configured to analyze sequential data, specifically the goal records from preceding years. In contrast, the XGBoost model focuses on a diverse array of player-specific features, offering predictions that account for the multifaceted nature of player performance. This strategic combination is designed to enhance the overall complexity and predictive accuracy of the system.![image]
+
+![basladiq8](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/866cb318-eb87-43c3-b5e1-4f4bd3e35471)
+
+The graph provides a clear depiction of the model's learning trajectory over numerous epochs. The training loss undergoes a steep decline, denoting a rapid adaptation by the model to the training dataset. The concurrent descent of the validation loss is indicative of the model's ability to generalize, as it implies that improvements in the model's predictions are not merely the result of memorizing the training data but also extend to previously unseen data. This is a positive sign that the model is learning patterns that are applicable to both the training and the validation datasets.
+
+![basladiq9](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/00f9cd7a-2c57-4f1a-9563-a82656264f1d)
+
+In examining the scatter plot, it's evident that for numerous data points, particularly at the lower end of the target value spectrum, the predicted values are in close proximity to the actual values, suggesting a reasonable degree of accuracy in the predictions. However, discrepancies become more pronounced with higher target values, signaling potential outliers previously discussed.
+The model's predictions do not perfectly mirror the actual values, implying that overfitting is unlikely, and indicating a certain level of generalizability. The distribution of predicted values around the actual ones offers a visual gauge of the error margin, which stands at a Test Mean Absolute Error (MAE) of 4.65, similar to the result of the SARIMAX model.
+The coefficient of determination, or R-squared value, hovers around 0.35 for both the LSTM and the XGBoost models. Efforts are being directed toward refining the R-squared value while also diminishing the error margins. The XGBoost model has a similar Test MAE of 4.72.
+An ensemble approach, combining Long Short-Term Memory (LSTM) networks with XGBoost models, was employed to generate predictions based on their mean, which resulted in a slight uptick in the R-squared value to 0.39. However, it is hypothesized that stacking linear regression into this ensemble method could potentially enhance the model's performance further.
+After implementing Linear Regression, the results are as follows:
+•	R-Squared ~ 0.5
+•	Test MAE ~ 4.2
+•	Test RMSE ~ 5.6
+These results indicate that the Linear Regression model has performed better than the individual LSTM and XGBoost models. It suggests that the model stacking approach effectively combines the strengths of both the XGBoost and LSTM models, resulting in more accurate and reliable predictions for the number of goals scored.
+The Linear Regression model seems to address some of the weaknesses present in the XGBoost and LSTM models when used individually. As a result, the composite model created through model stacking outperforms any single model on its own. Below graph represents results of 4 models:
+
+![basladiq10](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/11907f79-b1be-4f40-a32f-e6a1c59339ad)
+
+The XGBoost, Linear Regression, and LSTM models exhibit differing levels of accuracy in their predictions when compared to the actual values. There are instances where one model surpasses the others, highlighting the unique strengths of each model depending on the specific data point in question. It's worth noting that the actual values themselves display substantial variability, and all the models are striving to make predictions in the face of this inherent unpredictability.
+Furthermore, the normality of errors plays a crucial role in enhancing the models' predictive capabilities. It signifies that the models are effectively capturing the underlying patterns and tendencies within the data. The models are accounting for the random fluctuations and noise in the data, which can lead to more reliable and robust predictions.
+
+![basladiq11](https://github.com/aliiyevali/Decoding-Soccers-Data-Secrets/assets/147966223/9208e9df-f476-4f9a-ab2e-0bf78e7d5acd)
+
+# Conclusion:
+
+As a consequence, I observed that as I introduced greater complexity, the model's performance consistently improved. As I've consistently emphasized, the essence of machine learning extends beyond mere performance enhancement; it entails striking a delicate equilibrium between complexity and performance. In my specific case, the optimal performing model featured a fusion of model ensembling and stacking techniques. It achieved a Test MAE score of 4. When assessing the intricacies of soccer, my target column’s standard deviation of 7 and a goal range spanning from 0 to 60, achieving a Test MAE of 4 is indeed an impeccable outcome. Key assumptions such as stationarity, multicollinearity, normality, homoscedasticity, and others validated throughout all processes. Soccer is renowned for its inherent complexity, with the number of goals susceptible to fluctuations due to factors such as player transfers, coaching tactics, injuries, luck, personal circumstances, and more. Despite these formidable challenges, the models performed admirably under these dynamic conditions.
+
+# References:
 
 https://www.simplilearn.com/tutorials/statistics-tutorial/central-limit-theorem#:~:text=and%20its%20applications.-,What%20is%20the%20Central%20Limit%20Theorem%3F,equal%20to%20the%20population%20mean.
 
@@ -153,6 +212,7 @@ https://www.udemy.com/course/the-data-science-course-complete-data-science-bootc
 
 Povak, N. A., Hessburg, P. F., McDonnell, T. C., Reynolds, K. M., Sullivan, T. J., Salter, R. B., & Cosby, B. J. (2014). Machine learning and linear regression models to predict catchment-level base cation weathering rates across the southern Appalachian Mountain region, USA. Water Resources Research, 50(4), 2798–2814. https://doi.org/10.1002/2013WR014203
 
+https://towardsdatascience.com/ensemble-methods-in-machine-learning-what-are-they-and-why-use-them-68ec3f9fef5f
 
 
 
